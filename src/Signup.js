@@ -6,12 +6,18 @@ import './Signup.css';
 class Signup extends Component {
 
 
-    state = {
-        name: '',
-        email: '',
-        password: '',
-        passwordRep: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            email: '',
+            password: '',
+            passwordRep: '',
+            correctValidation: true
+        };
+
+    }
+
 
 
 
@@ -19,6 +25,9 @@ class Signup extends Component {
         event.preventDefault();
         console.log(`this sigUser`);
 
+        if (!this.correctValidation) {
+            return;
+        }
         // const user = {
         //     name: this.state.name
         // };
@@ -37,9 +46,9 @@ class Signup extends Component {
         //     })
 
         let newUser = {
-            name: "hans",
-            email: "hans@hansbot.pl",
-            password: "password",
+            username: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
         }
 
         const headers = {
@@ -53,7 +62,7 @@ class Signup extends Component {
             { 'headers': headers })
             .then((req) => {
 
-                // your code :)      
+                // your code :)   waidacja ze jest już usrname w bazie   
 
                 console.log(req.data);
             }).catch((error) => {
@@ -98,21 +107,25 @@ class Signup extends Component {
                     onSubmit={this.handleSubmit}>
 
                     <label for="name">Nazwa użytkownika</label>
-                    <input type="text" name="name" id="" value={this.state.name}
-                        onChange={this.handleNameChange} required
-                    ></input>
+                    <input type="text" name="name" id="" value={this.state.name} onChange={this.handleNameChange}>
+
+                    </input>
+                    <p>Wpisz nazwę uzytkownika</p>
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" value={this.state.email} onChange={this.handleEmailChange} required
+                    <input type="email" name="email" id="email" value={this.state.email} onChange={this.handleEmailChange}
                     ></input>
+                    <p>Wpisz email</p>
                     <label for="password">Hasło</label>
                     <input type="password" name="password" id="password"
-                        onChange={this.handlePasswordChange} required
+                        onChange={this.handlePasswordChange}
                     ></input>
+                    <p>Wpisz hasło</p>
                     <label for="password">Potwierdzenie hasła</label>
-                    <input type="password" name="passwordReps" id="passwordRep" value={this.state.passwordRep} required
+                    <input type="password" name="passwordReps" id="passwordRep" value={this.state.passwordRep}
 
                         onChange={this.handlePasswordRepChange}
                     ></input>
+                    <p>Powtórz hasło</p>
                     <input className="submit" type="submit" value="Wyślij"></input>
                 </form >
             </div >
