@@ -26,9 +26,9 @@ class Signup extends Component {
 
         console.log('waliduje');
         let validationCorrect = true;
-        let validationEmailCorrect = true;
-        let validationPasswordCorrect = true;
-        let validationPasswordRep = true;
+        // let validationEmailCorrect = true;
+        // let validationPasswordCorrect = true;
+        // let validationPasswordRep = true;
 
         if (this.state.name === '') {
             this.setState({ nameValidation: false });
@@ -40,35 +40,31 @@ class Signup extends Component {
 
         if (this.state.email === '') {
             this.setState({ emailValidation: false });
-            validationEmailCorrect = false;
+            validationCorrect = false;
         } else {
             this.setState({ emailValidation: true });
-            validationEmailCorrect = true;
+            validationCorrect = true;
         }
 
         if (this.state.password === '') {
             this.setState({ passwordValidation: false });
-            validationPasswordCorrect = false;
+            validationCorrect = false;
         } else {
             this.setState({ passwordValidation: true });
-            validationPasswordCorrect = true;
+            validationCorrect = true;
         }
+
 
         if (this.state.password === this.state.passwordRep) {
             this.setState({ passwordRepValidation: true });
-            validationPasswordRep = true;
+            validationCorrect = true;
         } else {
             this.setState({ passwordRepValidation: false });
-            validationPasswordRep = false;
+            validationCorrect = false;
         }
 
         return validationCorrect
 
-        return validationEmailCorrect
-
-        return validationPasswordCorrect
-
-        return validationPasswordRep;
     }
 
 
@@ -90,6 +86,7 @@ class Signup extends Component {
         const headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
+            'Authorization': 'Bearer <jwtToken>',
 
         }
 
